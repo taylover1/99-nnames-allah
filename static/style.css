@@ -1,0 +1,436 @@
+:root {
+    --white: #ffffff;
+    --paper: #fffefd;
+    --green: #073f34;
+    --green-soft: #1f5a4d;
+    --gold: #d49a18;
+    --gold-soft: #f2d99a;
+    --ink: #12382f;
+    --muted: #9a9a9a;
+    --line: #e7e0d4;
+    --success: #2f7f52;
+    --danger: #a94a3a;
+    --shadow-soft: 0 16px 38px rgba(18, 56, 46, 0.12);
+    --shadow-card: 0 22px 44px rgba(18, 56, 46, 0.16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--white);
+}
+
+button,
+select {
+    font: inherit;
+}
+
+.app-shell {
+    width: min(100% - 40px, 420px);
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 54px 0;
+}
+
+.intro {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: var(--gold);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+h1 {
+    margin: 0;
+    color: var(--green);
+    font-size: clamp(2.2rem, 10vw, 3.05rem);
+    line-height: 1;
+}
+
+.subtitle {
+    max-width: 300px;
+    margin: 12px auto 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.study-panel {
+    width: 100%;
+}
+
+.mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 24px;
+    padding: 5px;
+    border: 1px solid rgba(18, 56, 46, 0.12);
+    border-radius: 999px;
+    background: var(--paper);
+    box-shadow: var(--shadow-soft);
+}
+
+.mode-tab {
+    min-height: 42px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.mode-tab.is-active {
+    color: var(--white);
+    background: var(--green);
+}
+
+.mode-tab:hover {
+    transform: translateY(-1px);
+}
+
+.mode-screen.is-hidden {
+    display: none;
+}
+
+.progress-row,
+.quiz-top {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 14px;
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.progress-row #learnedCounter {
+    display: none;
+}
+
+.progress-track {
+    display: none;
+}
+
+.progress-fill {
+    width: 1%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--gold);
+    transition: width 400ms ease;
+}
+
+.name-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.name-picker select {
+    max-width: 166px;
+    min-height: 32px;
+    padding: 0 28px 0 14px;
+    border: 1px solid rgba(18, 56, 46, 0.22);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.name-card {
+    width: 100%;
+    min-height: 340px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    perspective: 1200px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    min-height: 340px;
+    transform-style: preserve-3d;
+    transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.name-card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face,
+.quiz-card {
+    border: 1px solid rgba(18, 56, 46, 0.06);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 26px;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    color: var(--white);
+    background: var(--green);
+    overflow-y: auto;
+    transform: rotateY(180deg);
+}
+
+.small-label {
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.arabic {
+    margin-top: 0;
+    color: var(--green);
+    font-family: "Amiri", serif;
+    font-size: clamp(3.8rem, 17vw, 5.2rem);
+    line-height: 1.22;
+    text-align: center;
+}
+
+.card-front .small-label {
+    margin-bottom: 30px;
+}
+
+.name-caption {
+    margin-top: 16px;
+    color: var(--gold);
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-back .name-caption {
+    color: var(--gold-soft);
+}
+
+.tap-hint {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
+.meaning {
+    max-width: 320px;
+    margin-top: 18px;
+    color: var(--white);
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    line-height: 1.12;
+    text-align: center;
+}
+
+.explanation {
+    max-width: 320px;
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    text-align: center;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.primary-button,
+.secondary-button,
+.answer-button {
+    min-height: 44px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.primary-button {
+    color: var(--white);
+    border: 1px solid var(--green);
+    background: var(--green);
+    box-shadow: 0 12px 24px rgba(18, 56, 46, 0.16);
+}
+
+.secondary-button,
+.answer-button {
+    color: var(--muted);
+    border: 1px solid rgba(18, 56, 46, 0.28);
+    background: var(--white);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.answer-button:hover {
+    transform: translateY(-2px);
+}
+
+.quiz-card {
+    min-height: 440px;
+    padding: 28px 22px;
+}
+
+.quiz-top {
+    justify-content: space-between;
+    color: var(--green);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.quiz-label {
+    margin: 28px 0 0;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.quiz-card h2 {
+    margin: 14px 0 30px;
+    color: var(--green);
+    max-width: 100%;
+    font-size: clamp(1.9rem, 8vw, 2.55rem);
+    line-height: 1.05;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.answer-button {
+    min-height: 54px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    color: var(--green);
+    text-align: left;
+}
+
+.answer-button.is-correct {
+    color: var(--white);
+    border-color: var(--success);
+    background: var(--success);
+}
+
+.answer-button.is-wrong {
+    color: var(--white);
+    border-color: var(--danger);
+    background: var(--danger);
+}
+
+.answer-button:disabled {
+    cursor: default;
+    transform: none;
+}
+
+.quiz-feedback {
+    min-height: 28px;
+    margin: 24px 0 0;
+    color: var(--green);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.quiz-feedback.is-wrong {
+    color: var(--danger);
+}
+
+.quiz-next {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.answer-button:focus-visible,
+.mode-tab:focus-visible,
+.name-picker select:focus-visible,
+.name-card:focus-visible {
+    outline: 3px solid rgba(212, 154, 24, 0.36);
+    outline-offset: 4px;
+}
+
+@media (min-width: 860px) {
+    .app-shell {
+        width: min(100% - 96px, 1080px);
+        display: grid;
+        grid-template-columns: 0.86fr 1fr;
+        gap: 72px;
+        align-items: center;
+        padding: 58px 0;
+    }
+
+    .intro {
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .subtitle {
+        margin-left: 0;
+    }
+
+    .study-panel {
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 390px) {
+    .app-shell {
+        width: min(100% - 28px, 420px);
+        padding: 34px 0;
+    }
+
+    .mode-tabs {
+        margin-bottom: 20px;
+    }
+
+    .name-card,
+    .card-inner {
+        min-height: 320px;
+    }
+
+    .card-face,
+    .quiz-card {
+        padding-inline: 18px;
+    }
+}
